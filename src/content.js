@@ -6,7 +6,7 @@
 export const site = {
   brand: 'Maker',
 
-  ctaLabel: 'להצטרף לרשת',
+  ctaLabel: 'הצטרף בתור יוצר',
   ctaNavLabel: 'להצטרף',
   ctaSecondaryLabel: 'רגע, איך זה עובד?',
 
