@@ -32,6 +32,9 @@ export default function Nav() {
             <a href="#how">איך זה עובד</a>
             <a href="#money">כמה מרוויחים</a>
             <a href="#community">הקהילה</a>
+            <a className="nav__switch" href={site.businessUrl}>
+              אני עסק
+            </a>
           </nav>
 
           <button className="btn btn--primary btn--sm nav__cta" type="button" onClick={openJoin}>

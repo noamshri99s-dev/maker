@@ -10,6 +10,10 @@ export const site = {
   ctaNavLabel: 'להצטרף',
   ctaSecondaryLabel: 'רגע, איך זה עובד?',
 
+  // קישורים בין שני האתרים
+  creatorsUrl: '/',
+  businessUrl: '/business/',
+
   // Web3Forms — מקבל את תשובות השאלון למייל
   web3formsAccessKey: 'ccae87b8-5da9-4e2b-96c9-fed4f1ac63c1',
 
