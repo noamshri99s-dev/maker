@@ -1,9 +1,6 @@
-import { useRef, useState } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
+import { useState } from 'react'
 import { Icon } from '../components/Icons'
 import { emilySite } from './content'
-import EmilyReveal from './EmilyReveal'
 
 const initialForm = {
   fullName: '',
@@ -16,33 +13,10 @@ const initialForm = {
 const availabilityOptions = ['יכול/ה לצלם השבוע', 'בשבוע הבא', 'גמיש']
 
 export default function EmilySignup() {
-  const seatsRef = useRef(null)
   const [formData, setFormData] = useState(initialForm)
   const [error, setError] = useState('')
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('.emily-seat', {
-          scale: 0.72,
-          autoAlpha: 0,
-          duration: 0.45,
-          stagger: 0.07,
-          ease: 'back.out(1.6)',
-          scrollTrigger: {
-            trigger: seatsRef.current,
-            start: 'top 82%',
-            once: true,
-          },
-        })
-      })
-      return () => mm.revert()
-    },
-    { scope: seatsRef },
-  )
 
   const updateField = (name, value) => {
     setFormData((current) => ({ ...current, [name]: value }))
@@ -123,20 +97,18 @@ export default function EmilySignup() {
     <section className="section emily-signup" id="join">
       <div className="wrap emily-signup__grid">
         <div>
-          <EmilyReveal className="eyebrow" as="div">
-            הרשמה לפול
-          </EmilyReveal>
-          <EmilyReveal as="h2" className="h2" delay={40}>
+          <div className="eyebrow">הרשמה לפול</div>
+          <h2 className="h2">
             חמישה יוצרים נכנסים.
             <br />
             מי שנרשם — תופס מקום.
-          </EmilyReveal>
-          <EmilyReveal className="lead" as="p" delay={80}>
+          </h2>
+          <p className="lead">
             זה קמפיין קצר: סרטון UGC אחד על אמילי, לפי תבנית שנשלח, ותשלום מהפול. אין צורך בעוקבים —
             צריך טלפון וזמינות לצלם.
-          </EmilyReveal>
+          </p>
 
-          <div className="emily-seats" ref={seatsRef} aria-label="חמישה מקומות פנויים בפול">
+          <div className="emily-seats" aria-label="חמישה מקומות פנויים בפול">
             {Array.from({ length: emilySite.poolSize }).map((_, index) => (
               <div className="emily-seat" key={index}>
                 <strong>{index + 1}</strong>
@@ -146,7 +118,7 @@ export default function EmilySignup() {
           </div>
         </div>
 
-        <EmilyReveal className="emily-form" delay={60}>
+        <div className="emily-form">
           {sent ? (
             <div className="emily-form__done">
               <div className="wizard__done-icon">
@@ -196,6 +168,9 @@ export default function EmilySignup() {
                     onChange={(event) => updateField('instagram', event.target.value)}
                     placeholder="@username"
                     autoComplete="username"
+                    inputMode="text"
+                    autoCapitalize="none"
+                    autoCorrect="off"
                   />
                 </label>
                 <label className="wizard__field">
@@ -209,6 +184,9 @@ export default function EmilySignup() {
                     onChange={(event) => updateField('tiktok', event.target.value)}
                     placeholder="@username"
                     autoComplete="off"
+                    inputMode="text"
+                    autoCapitalize="none"
+                    autoCorrect="off"
                   />
                 </label>
 
@@ -236,7 +214,11 @@ export default function EmilySignup() {
 
               {error ? <div className="wizard__error">{error}</div> : null}
 
-              <button className="btn btn--primary btn--lg emily-form__submit" type="submit" disabled={submitting}>
+              <button
+                className="btn btn--primary btn--lg emily-form__submit"
+                type="submit"
+                disabled={submitting}
+              >
                 {submitting ? 'שולח…' : 'שולחים ותופסים מקום'}
                 {!submitting && (
                   <span className="btn__arrow">
@@ -246,7 +228,7 @@ export default function EmilySignup() {
               </button>
             </form>
           )}
-        </EmilyReveal>
+        </div>
       </div>
     </section>
   )
