@@ -455,12 +455,12 @@
   }
 
   .emily-nav__pill {
-    height: 56px;
-    margin: 8px 12px;
-    padding: 4px 4px 4px 12px;
-    gap: 8px;
+    height: 58px;
+    margin: 10px 12px;
+    padding: 5px 5px 5px 14px;
+    gap: 10px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.96);
     border: 1px solid rgba(23, 17, 14, 0.08);
     box-shadow: 0 8px 24px -12px rgba(23, 17, 14, 0.28);
   }
@@ -556,13 +556,9 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 360px) {
   .emily-nav__spots {
     display: none;
-  }
-
-  .emily-nav__name {
-    font-size: 16px;
   }
 }
 
