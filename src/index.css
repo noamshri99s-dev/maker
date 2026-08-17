@@ -553,6 +553,10 @@ section {
   color: var(--muted);
 }
 
+a.hero-board__row {
+  cursor: pointer;
+}
+
 .hero-board__row strong {
   display: block;
   color: var(--ink);

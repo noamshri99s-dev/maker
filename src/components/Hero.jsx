@@ -13,9 +13,9 @@ const strip = [
 ]
 
 const campaigns = [
+  { name: 'קמפיין אמילי', status: '5 מקומות בפול', tone: 'wait', href: '/emily/' },
   { name: 'קמפיין סקין-קר', status: 'מאושר להעלאה', tone: 'ok' },
-  { name: 'קמפיין אוכל מהיר', status: 'ממתין לאישור', tone: 'wait' },
-  { name: 'קמפיין כושר', status: 'נתונים נספרים', tone: 'live' },
+  { name: 'קמפיין אוכל מהיר', status: 'נתונים נספרים', tone: 'live' },
 ]
 
 export default function Hero() {
@@ -104,17 +104,20 @@ export default function Hero() {
             </div>
 
             <div className="hero-board__list">
-              {campaigns.map((item) => (
-                <div className="hero-board__row" key={item.name}>
-                  <div>
-                    <strong>{item.name}</strong>
-                    <span className={`hero-board__tag hero-board__tag--${item.tone}`}>
-                      {item.status}
-                    </span>
-                  </div>
-                  <Icon name="arrow" size={16} />
-                </div>
-              ))}
+              {campaigns.map((item) => {
+                const Tag = item.href ? 'a' : 'div'
+                return (
+                  <Tag className="hero-board__row" key={item.name} href={item.href}>
+                    <div>
+                      <strong>{item.name}</strong>
+                      <span className={`hero-board__tag hero-board__tag--${item.tone}`}>
+                        {item.status}
+                      </span>
+                    </div>
+                    <Icon name="arrow" size={16} />
+                  </Tag>
+                )
+              })}
             </div>
           </div>
 

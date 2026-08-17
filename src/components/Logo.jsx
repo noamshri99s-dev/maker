@@ -1,9 +1,9 @@
 import logo from '../assets/logo.png'
 import { site } from '../content'
 
-export default function Logo({ tag }) {
+export default function Logo({ tag, href = '#top' }) {
   return (
-    <a href="#top" className="logo">
+    <a href={href} className="logo">
       <img src={logo} alt={site.brand} className="logo__img" />
       <span className="logo__wordmark" aria-hidden="true">
         {site.brand}

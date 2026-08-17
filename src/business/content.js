@@ -14,6 +14,7 @@ export const bizSite = {
   // קישורים בין שני האתרים
   creatorsUrl: '/',
   businessUrl: '/business/',
+  emilyUrl: '/emily/',
 
   // Web3Forms — מקבל את הבריפים למייל
   web3formsAccessKey: 'ccae87b8-5da9-4e2b-96c9-fed4f1ac63c1',
