@@ -13,6 +13,7 @@ export default defineConfig({
       input: {
         creators: resolve(root, 'index.html'),
         business: resolve(root, 'business/index.html'),
+        emily: resolve(root, 'emily/index.html'),
       },
     },
   },

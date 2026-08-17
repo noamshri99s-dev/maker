@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
-import { site } from '../content'
-import Logo from './Logo'
-import { useJoin } from './JoinContext'
+import Logo from '../components/Logo'
+import { emilySite } from './content'
 
-export default function Nav() {
+export default function EmilyNav() {
   const [pinned, setPinned] = useState(false)
-  const { openJoin } = useJoin()
 
   useEffect(() => {
     const onScroll = () => setPinned(window.scrollY > 40)
@@ -19,28 +17,26 @@ export default function Nav() {
       <div className="wrap">
         <div className="nav__pill">
           <div className="nav__brand">
-            <Logo />
-            <div className="nav__status" aria-label="8 קמפיינים פתוחים">
+            <Logo tag={emilySite.brandTag} href={emilySite.creatorsUrl} />
+            <div className="nav__status" aria-label={`${emilySite.poolSize} מקומות בפול`}>
               <span className="nav__status-divider" aria-hidden="true" />
               <span className="nav__status-dot" aria-hidden="true" />
-              <span className="nav__status-text">8 קמפיינים פתוחים</span>
+              <span className="nav__status-text">{emilySite.poolSize} מקומות בפול</span>
             </div>
           </div>
 
           <nav className="nav__links">
-            <a href="#followers">בלי עוקבים</a>
+            <a href="#product">מה מצלמים</a>
             <a href="#how">איך זה עובד</a>
-            <a href="#money">כמה מרוויחים</a>
-            <a href="#community">הקהילה</a>
-            <a className="nav__switch" href={site.emilyUrl}>
-              קמפיין אמילי
+            <a href="#join">הרשמה</a>
+            <a className="nav__switch" href={emilySite.creatorsUrl}>
+              כל הקמפיינים
             </a>
-            <a href={site.businessUrl}>אני עסק</a>
           </nav>
 
-          <button className="btn btn--primary btn--sm nav__cta" type="button" onClick={openJoin}>
-            {site.ctaNavLabel}
-          </button>
+          <a className="btn btn--primary btn--sm nav__cta" href="#join">
+            {emilySite.ctaNavLabel}
+          </a>
         </div>
       </div>
     </header>
