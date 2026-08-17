@@ -1,7 +1,79 @@
 /* קמפיין אמילי — visals on top of the shared Maker system */
 
-.emily-hero__line {
-  display: inline-block;
+.emily-nav,
+.emily-nav .wrap {
+  pointer-events: auto;
+}
+
+.emily-nav {
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 0 0;
+}
+
+.emily-nav__pill {
+  gap: 12px;
+  padding: 8px 8px 8px 8px;
+}
+
+.emily-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: none;
+  padding-inline-start: 6px;
+  color: inherit;
+}
+
+.emily-nav__logo {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+
+.emily-nav__name {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.emily-nav__spots {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-inline-start: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef8f2;
+  color: #0f5c4a;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.emily-nav__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1f9d57;
+  box-shadow: 0 0 0 4px rgba(31, 157, 87, 0.14);
+}
+
+.emily-nav__links {
+  gap: 22px;
+}
+
+.emily-nav__cta {
+  height: 42px;
+  padding: 0 18px;
+  flex: none;
+  border-radius: 999px;
+  font-size: 15px;
+  touch-action: manipulation;
+}
+
+.emily-hero {
+  padding-top: calc(118px + env(safe-area-inset-top, 0px));
 }
 
 .emily-hero__stage {
@@ -250,11 +322,15 @@
 #product,
 #how,
 #join {
-  scroll-margin-top: 96px;
+  scroll-margin-top: calc(96px + env(safe-area-inset-top, 0px));
 }
 
 .emily-form .wizard__fields {
   margin-top: 22px;
+}
+
+.emily-signup {
+  padding-top: clamp(64px, 9vw, 120px);
 }
 
 .emily-signup__grid {
@@ -316,6 +392,8 @@
 .emily-form__submit {
   width: 100%;
   margin-top: 24px;
+  min-height: 56px;
+  touch-action: manipulation;
 }
 
 .emily-form__done {
@@ -336,7 +414,22 @@
   max-width: 34ch;
 }
 
+.emily-dock {
+  display: none;
+}
+
+.emily-form .wizard__choice,
+.emily-form .wizard__field input,
+.emily-nav__cta,
+.emily-hero .btn {
+  touch-action: manipulation;
+}
+
 @media (max-width: 980px) {
+  .emily-nav__links {
+    display: none;
+  }
+
   .emily-product__grid,
   .emily-signup__grid {
     grid-template-columns: 1fr;
@@ -351,20 +444,144 @@
   }
 }
 
+@media (max-width: 768px) {
+  .emily-nav {
+    padding: env(safe-area-inset-top, 0px) 0 0;
+  }
+
+  .emily-nav .wrap {
+    padding: 0;
+    max-width: none;
+  }
+
+  .emily-nav__pill {
+    height: 58px;
+    margin: 10px 12px;
+    padding: 5px 5px 5px 14px;
+    gap: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(23, 17, 14, 0.08);
+    box-shadow: 0 8px 24px -12px rgba(23, 17, 14, 0.28);
+  }
+
+  .emily-nav__brand {
+    padding-inline-start: 0;
+    gap: 8px;
+  }
+
+  .emily-nav__logo {
+    height: 28px;
+  }
+
+  .emily-nav__name {
+    font-size: 16px;
+  }
+
+  .emily-nav__spots {
+    font-size: 11.5px;
+    margin-inline-start: 4px;
+    padding: 5px 8px;
+  }
+
+  .emily-nav__cta {
+    height: 44px;
+    padding: 0 16px;
+    font-size: 14.5px;
+    font-weight: 700;
+    box-shadow: none;
+  }
+
+  .emily-nav__cta:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .emily-hero {
+    padding-top: calc(84px + env(safe-area-inset-top, 0px));
+  }
+
+  .emily-hero .hero-float {
+    display: none;
+  }
+
+  .emily-hero__stage {
+    width: min(100%, 280px);
+  }
+
+  .emily-hero .hero__cta {
+    padding-inline: 0;
+  }
+
+  .emily-hero .hero__cta .btn {
+    max-width: none;
+    min-height: 54px;
+    padding: 0 20px;
+  }
+
+  .emily-dock {
+    display: block;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 80;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: linear-gradient(180deg, rgba(251, 247, 240, 0) 0%, var(--cream) 28%);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .emily-dock__btn {
+    pointer-events: auto;
+    width: 100%;
+    height: 54px;
+    border-radius: 999px;
+    font-size: 17px;
+    box-shadow: 0 10px 28px -10px rgba(224, 77, 5, 0.7);
+  }
+
+  .emily-dock.is-hidden {
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+  }
+
+  .emily-footer,
+  .emily-signup {
+    padding-bottom: calc(28px + 78px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .emily-form .wizard__choice {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 360px) {
+  .emily-nav__spots {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   .emily-hero__portrait {
-    width: min(100%, 280px);
+    width: min(100%, 240px);
     border-width: 6px;
     border-radius: 28px;
   }
 
+  .emily-hero__card {
+    inset-inline-start: 0;
+    bottom: 12px;
+    width: min(86%, 220px);
+    padding: 10px 12px;
+  }
+
   .emily-seats {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 6px;
   }
 
   .emily-seat {
-    min-height: 76px;
+    min-height: 72px;
     border-radius: 16px;
     padding: 8px 4px;
   }
@@ -381,19 +598,15 @@
   .emily-chat {
     min-height: 400px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .emily-hero__line,
-  .emily-hero__eyebrow,
-  .emily-hero__sub,
-  .emily-hero__cta,
-  .emily-hero__note span,
-  .emily-hero__visual > *,
-  .emily-bubble,
-  .emily-step,
-  .emily-seat {
-    opacity: 1 !important;
-    transform: none !important;
+  .emily-footer .footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .emily-footer .footer__links {
+    flex-wrap: wrap;
+    gap: 14px 18px;
   }
 }

@@ -1,78 +1,25 @@
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
 import { Icon } from '../components/Icons'
 import emilyPortrait from '../assets/emily.webp'
 import { emilyChat, emilyFeatures, emilySteps, emilyTalkingPoints } from './content'
-import EmilyReveal from './EmilyReveal'
 
 export default function EmilyProduct() {
-  const chatRef = useRef(null)
-  const seatsRef = useRef(null)
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('.emily-bubble', {
-          y: 18,
-          autoAlpha: 0,
-          duration: 0.45,
-          stagger: 0.16,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: chatRef.current,
-            start: 'top 75%',
-            once: true,
-          },
-        })
-      })
-      return () => mm.revert()
-    },
-    { scope: chatRef },
-  )
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia()
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.from('.emily-step', {
-          y: 22,
-          autoAlpha: 0,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: seatsRef.current,
-            start: 'top 80%',
-            once: true,
-          },
-        })
-      })
-      return () => mm.revert()
-    },
-    { scope: seatsRef },
-  )
-
   return (
     <>
       <section className="section emily-product" id="product">
         <div className="wrap emily-product__grid">
           <div>
-            <EmilyReveal className="eyebrow" as="div">
-              המוצר שמצלמים
-            </EmilyReveal>
-            <EmilyReveal as="h2" className="h2" delay={40}>
+            <div className="eyebrow">המוצר שמצלמים</div>
+            <h2 className="h2">
               אמילי זוכרת את השיחות.
               <br />
               אתם רק מדברים.
-            </EmilyReveal>
-            <EmilyReveal className="lead" as="p" delay={80}>
+            </h2>
+            <p className="lead">
               אמילי היא המזכירה החכמה בוואטסאפ לעסקים שחיים משיחות טלפון. השיחות מוקלטות, מתומללות
               ומסוכמות ב־AI. היא מוציאה משימות, זוכרת מה סיכמתם עם כל לקוח, ושולחת הכל ישר לוואטסאפ.
-            </EmilyReveal>
+            </p>
 
-            <EmilyReveal className="emily-talk" delay={120}>
+            <div className="emily-talk">
               <h3>מה אומרים בסרטון</h3>
               <ul>
                 {emilyTalkingPoints.map((point) => (
@@ -84,10 +31,10 @@ export default function EmilyProduct() {
                   </li>
                 ))}
               </ul>
-            </EmilyReveal>
+            </div>
           </div>
 
-          <div className="emily-phone" ref={chatRef}>
+          <div className="emily-phone">
             <div className="emily-phone__bezel">
               <div className="emily-phone__notch" aria-hidden="true" />
               <div className="emily-chat">
@@ -125,32 +72,28 @@ export default function EmilyProduct() {
         <div className="wrap">
           <div className="grid grid--3 emily-features">
             {emilyFeatures.map((feature) => (
-              <EmilyReveal className="card" key={feature.title}>
+              <div className="card" key={feature.title}>
                 <div className="card__icon">
                   <Icon name={feature.icon} size={24} />
                 </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.text}</p>
-              </EmilyReveal>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section--tint" id="how" ref={seatsRef}>
+      <section className="section section--tint" id="how">
         <div className="wrap">
           <div className="head center">
-            <EmilyReveal className="eyebrow" as="div">
-              איך זה עובד
-            </EmilyReveal>
-            <EmilyReveal as="h2" className="h2">
+            <div className="eyebrow">איך זה עובד</div>
+            <h2 className="h2">
               נרשמים. מצלמים אחד.
               <br />
               מקבלים תשלום.
-            </EmilyReveal>
-            <EmilyReveal className="lead" as="p" delay={70}>
-              ארבעה שלבים. הפול הוא לחמישה יוצרים שנרשמים לקמפיין הזה.
-            </EmilyReveal>
+            </h2>
+            <p className="lead">ארבעה שלבים. הפול הוא לחמישה יוצרים שנרשמים לקמפיין הזה.</p>
           </div>
 
           <div className="grid grid--2 emily-steps">
