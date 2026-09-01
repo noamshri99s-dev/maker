@@ -19,7 +19,33 @@ export const emilySite = {
   web3formsAccessKey: 'ccae87b8-5da9-4e2b-96c9-fed4f1ac63c1',
 
   poolSize: 5,
+
+  payoutBase: 300,
+  payoutMax: 600,
 }
+
+export const emilyDealPerks = [
+  { title: 'סרטון לדוגמה', text: 'רואים בדיוק מה מצלמים' },
+  { title: 'תדריך מוכן', text: 'מה להגיד, בלי לנחש' },
+  { title: 'הסכם בוואטסאפ', text: 'הבוט שולח אחרי ההרשמה' },
+  { title: 'עד ₪600', text: 'לפי מה שאישרת בהסכם' },
+]
+
+export const emilyDealEdit = {
+  id: 'edit',
+  title: 'עורכת את הסרטון',
+  text: 'עריכה מלאה לפני השליחה — לא רק צילום גולמי.',
+  amount: 100,
+}
+
+export const emilyDealPlatforms = [
+  { id: 'reels50k', title: '50K רילס', text: 'רילס באינסטגרם לקהל גדול', amount: 50 },
+  { id: 'reelsFeed', title: 'רילס בפיד', text: 'עולה גם לפיד, לא רק לרילס', amount: 30 },
+  { id: 'tiktok', title: 'טיקטוק', text: 'הערוץ שמשלם הכי הרבה בקמפיין', amount: 70 },
+  { id: 'igStory', title: 'סטורי באינסטגרם', text: 'סטורי עם לינק או תיוג', amount: 25 },
+  { id: 'facebook', title: 'פייסבוק', text: 'פוסט או רילס בפייסבוק', amount: 15 },
+  { id: 'status', title: 'סטטוס', text: 'סטטוס בוואטסאפ', amount: 10 },
+]
 
 export const emilyHeroPoints = ['סרטון אחד', 'תבנית מוכנה', 'תשלום מהפול']
 

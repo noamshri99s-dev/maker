@@ -7,14 +7,14 @@ export default function EmilyDock() {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
-    const join = document.getElementById('join')
-    if (!join) return undefined
+    const form = document.querySelector('.emily-form')
+    if (!form) return undefined
 
     const observer = new IntersectionObserver(
       ([entry]) => setHidden(entry.isIntersecting),
-      { threshold: 0.28 },
+      { threshold: 0.12, rootMargin: '0px 0px -80px 0px' },
     )
-    observer.observe(join)
+    observer.observe(form)
     return () => observer.disconnect()
   }, [])
 

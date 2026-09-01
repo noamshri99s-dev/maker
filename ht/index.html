@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FBF7F0" />
+    <title>Maker לעסקים — רשת יוצרים מצלמת את המוצר שלך | תשלום לפי צפיות</title>
+    <meta
+      name="description"
+      content="Maker מגייסת עשרות יוצרים אמיתיים שמצלמים את המוצר של העסק שלך. מכניסים תקציב לפּוּל, מאשרים כל סרטון לפני העלאה, ומשלמים לפי הצפיות שנספרו."
+    />
+    <meta
+      name="keywords"
+      content="UGC, שיווק ברשתות, יוצרי תוכן, קמפיין לעסקים, סרטוני מוצר, פרסום, Maker, תשלום לפי צפיות"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Hebrew" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:title" content="Maker לעסקים — רשת יוצרים מצלמת את המוצר שלך" />
+    <meta
+      property="og:description"
+      content="עשרות יוצרים אמיתיים מצלמים את המוצר שלך. אתה מאשר כל סרטון ומשלם לפי הצפיות שנספרו — בלי הפקה ובלי ריטיינר."
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Maker לעסקים — רשת יוצרים מצלמת את המוצר שלך" />
+    <meta
+      name="twitter:description"
+      content="עשרות יוצרים אמיתיים מצלמים את המוצר שלך. תשלום לפי צפיות שנספרו — בלי הפקה ובלי ריטיינר."
+    />
+    <style>
+      html {
+        margin: 0;
+        min-height: 100%;
+        background: #fbf7f0;
+        color: #17130f;
+        /* גלילה רק על html — לא על body (מונע חסימת גלגלת בדסקטופ) */
+        overflow-x: clip;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #fbf7f0;
+        color: #17130f;
+        font-family: "Heebo", "Assistant", system-ui, -apple-system, sans-serif;
+        overflow: visible;
+      }
+      #root {
+        min-height: 100dvh;
+        min-height: 100svh;
+      }
+    </style>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&family=Heebo:wght@400;700;900&family=Rubik:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script>
+      /* החלת העדפות נגישות לפני הציור הראשון — מונע הבהוב */
+      (function () {
+        try {
+          var raw = localStorage.getItem("a11y-prefs");
+          if (!raw) return;
+          var p = JSON.parse(raw);
+          var h = document.documentElement;
+          var map = {
+            readableFont: "a11y-readable-font",
+            letterSpacing: "a11y-letter-spacing",
+            highContrast: "a11y-high-contrast",
+            darkMode: "a11y-dark",
+            lightMode: "a11y-light",
+            invert: "a11y-invert",
+            grayscale: "a11y-grayscale",
+            underlineLinks: "a11y-underline-links",
+            highlightHeadings: "a11y-highlight-headings",
+            bigCursor: "a11y-big-cursor",
+            readingGuide: "a11y-reading-guide",
+            readingMask: "a11y-reading-mask",
+            stopAnimations: "a11y-stop-animations",
+          };
+          Object.keys(map).forEach(function (k) {
+            if (p[k]) h.classList.add(map[k]);
+          });
+          var scale = p.textScale || 100;
+          if (scale === 110) h.classList.add("a11y-text-110");
+          if (scale === 125) h.classList.add("a11y-text-125");
+          if (scale === 150) h.classList.add("a11y-text-150");
+          h.style.fontSize = (16 * scale) / 100 + "px";
+        } catch (e) {}
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/ht/main.tsx"></script>
+  </body>
+</html>

@@ -5,17 +5,31 @@ import { useLead } from './BizLeadContext'
 
 export default function BizNav() {
   const [pinned, setPinned] = useState(false)
+  const [progress, setProgress] = useState(0)
   const { openLead } = useLead()
 
   useEffect(() => {
-    const onScroll = () => setPinned(window.scrollY > 40)
+    const onScroll = () => {
+      setPinned(window.scrollY > 40)
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   return (
     <header className={`nav ${pinned ? 'nav--pinned' : ''}`}>
+      <div
+        className="nav__progress"
+        aria-hidden="true"
+        style={{ transform: `scaleX(${progress})` }}
+      />
       <div className="wrap">
         <div className="nav__pill">
           <div className="nav__brand">
@@ -36,7 +50,7 @@ export default function BizNav() {
             <a href="#why">למה לא משפיען</a>
             <a href="#how">איך זה עובד</a>
             <a href="#budget">איך משלמים</a>
-            <a href="#network">הרשת</a>
+            <a href="#faq">שאלות</a>
             <a className="nav__switch" href={bizSite.creatorsUrl}>
               אני יוצר
             </a>
