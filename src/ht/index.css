@@ -1382,6 +1382,17 @@
     text-wrap: balance;
     text-shadow: 0 2px 18px rgba(22, 18, 12, 0.18);
   }
+  .ht-hero-brand__mark {
+    display: inline;
+    padding: 0 0.18em 0.04em;
+    margin: 0 0.04em;
+    background: #fff8e8;
+    color: var(--ht-ink);
+    border-radius: 0.22em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    box-shadow: 0 2px 0 rgba(22, 18, 12, 0.12);
+  }
 
   .ht-hero-brand__sub {
     margin: clamp(1rem, 2.5vw, 1.35rem) auto 0;

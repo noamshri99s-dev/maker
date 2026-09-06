@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRightIcon, CheckIcon } from "./Icons";
 import {
-  CALENDLY_BOOKING_URL,
   STEPS,
   submitAssessment,
   type AssessmentAnswers,
@@ -125,13 +124,6 @@ export default function AssessmentModal({
     return () => cancelAnimationFrame(frame);
   }, [open, done, step.type]);
 
-  const calendlyEmbedUrl = useMemo(() => {
-    const url = new URL(CALENDLY_BOOKING_URL);
-    url.searchParams.set("layout", "mobile");
-    if (firstName.trim()) url.searchParams.set("name", firstName.trim());
-    return url.toString();
-  }, [firstName]);
-
   const goNext = () => {
     setDirection(1);
     setIndex((i) => Math.min(i + 1, total - 1));
@@ -142,6 +134,7 @@ export default function AssessmentModal({
   };
 
   const currentText = step.type === "text" ? answers[step.id] ?? "" : "";
+  const isLastStep = index === total - 1;
 
   const validateDetails = () => {
     const next: typeof formErrors = {};
@@ -167,16 +160,19 @@ export default function AssessmentModal({
       ...finalAnswers,
       fullName: firstName.trim(),
       phone: phone.trim(),
+      consent: agreeTerms ? "true" : "false",
+      marketing: agreeMarketing ? "true" : "false",
     };
     try {
-      await submitAssessment(payload);
+      // שמירה שנייה — הבריף המלא עם כל הפרטים
+      await submitAssessment(payload, "full");
       setDone(true);
-      setStatusMsg("הפרטים התקבלו בהצלחה. אפשר לקבוע פגישה ביומן.");
+      setStatusMsg("הבריף התקבל בהצלחה. יחזרו אליך בהקדם.");
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("assessment submit failed", err);
       setDone(true);
-      setStatusMsg("הפרטים נשמרו. אפשר לקבוע פגישה ביומן.");
+      setStatusMsg("הפרטים נשמרו. יחזרו אליך בהקדם.");
     } finally {
       setSubmitting(false);
     }
@@ -195,11 +191,19 @@ export default function AssessmentModal({
 
   const startQuestions = () => {
     if (!validateDetails()) return;
-    setAnswers((a) => ({
-      ...a,
+    const withDetails: AssessmentAnswers = {
+      ...answers,
+      fullName: firstName.trim(),
+      phone: phone.trim(),
       consent: agreeTerms ? "true" : "false",
       marketing: agreeMarketing ? "true" : "false",
-    }));
+    };
+    setAnswers(withDetails);
+    // שמירה ראשונה — שם + טלפון נשמרים מיד (ליד חלקי), בלי לעכב את המשתמש
+    void submitAssessment(withDetails, "partial").catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error("partial lead submit failed", err);
+    });
     goNext();
   };
 
@@ -221,7 +225,7 @@ export default function AssessmentModal({
         >
           <motion.div
             ref={dialogRef as React.RefObject<HTMLDivElement>}
-            className={`ht-modal${done ? " ht-modal--booking" : ""}`}
+            className="ht-modal"
             role="dialog"
             aria-modal="true"
             aria-label="שאלון אפיון"
@@ -261,19 +265,34 @@ export default function AssessmentModal({
                 <div className="sr-only" role="status" aria-live="polite">
                   {statusMsg}
                 </div>
-                <h2 className="mt-6 text-2xl font-black">נקבע שיחה לבניית הקמפיין</h2>
-                <p className="mx-auto mt-3 max-w-sm" style={{ color: "var(--ht-text-soft)" }}>
-                  קיבלנו את הבריף. בחר עכשיו את הזמן שנוח לך:
+                <h2 className="mt-6 text-2xl font-black">
+                  קיבלנו את הבריף שלך 🎉
+                </h2>
+                <p className="mx-auto mt-3 max-w-md" style={{ color: "var(--ht-text-soft)" }}>
+                  יחזרו אליך בהקדם לקביעת <strong>פגישת אסטרטגיה לעסק שלך</strong> —
+                  נעבור יחד על המוצר, נבנה את הקמפיין ונראה איך מביאים לך עשרות
+                  סרטונים אמיתיים שמדברים עליו.
                 </p>
-                <div className="ht-calendly-embed mt-6 w-full overflow-hidden rounded-xl">
-                  <iframe
-                    key={calendlyEmbedUrl}
-                    title="תיאום שיחה לבניית קמפיין"
-                    src={calendlyEmbedUrl}
-                    className="ht-calendly-embed__frame"
-                    loading="eager"
-                    allow="payment"
-                  />
+                {phone.trim() && (
+                  <p
+                    className="mx-auto mt-4 max-w-sm text-sm"
+                    style={{ color: "var(--ht-text-mute)" }}
+                  >
+                    נחזור אליך למספר{" "}
+                    <span dir="ltr" style={{ fontWeight: 700 }}>
+                      {phone.trim()}
+                    </span>{" "}
+                    — כדאי להיות זמין 📞
+                  </p>
+                )}
+                <div className="ht-details-cta mt-8">
+                  <button
+                    className="ht-btn ht-btn--wide ht-btn--details"
+                    type="button"
+                    onClick={onClose}
+                  >
+                    סגירה
+                  </button>
                 </div>
               </div>
             ) : (
@@ -402,8 +421,21 @@ export default function AssessmentModal({
                           {currentText.length}/{MAX_TEXT}
                         </div>
                         <div className="mt-4 flex justify-end">
-                          <button className="ht-btn" onClick={goNext} type="button">
-                            <span>הבא</span>
+                          <button
+                            className="ht-btn"
+                            onClick={() =>
+                              isLastStep ? submitAll(answers) : goNext()
+                            }
+                            type="button"
+                            disabled={submitting}
+                          >
+                            <span>
+                              {isLastStep
+                                ? submitting
+                                  ? "שולח…"
+                                  : "שליחת הבריף"
+                                : "הבא"}
+                            </span>
                             <svg
                               className="ht-btn__arrow"
                               width="20"

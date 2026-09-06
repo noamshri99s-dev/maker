@@ -61,7 +61,8 @@ export default function Hero({ onOpenPanel, ctaRef }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
-            לא צריך משפיען. צריך המון אנשים אמיתיים שמצלמים את המוצר שלך — ואתה משלם לפי צפיות
+            לא צריך משפיען. צריך המון אנשים אמיתיים שמצלמים את המוצר שלך —{" "}
+            <mark className="ht-hero-brand__mark">400</mark> שקל בממוצע ליוצר
           </motion.h1>
 
           <motion.p

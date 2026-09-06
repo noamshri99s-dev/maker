@@ -25,9 +25,6 @@ export type TextStep = {
 
 export type Step = DetailsStep | RadioStep | TextStep;
 
-export const CALENDLY_BOOKING_URL =
-  "https://cal.com/royazaria/נועםשרי";
-
 export const STEPS: Step[] = [
   {
     id: "details",
@@ -102,21 +99,76 @@ export type AssessmentAnswers = Record<string, string> & {
   marketing?: string;
 };
 
-/**
- * שליחת התשובות. יש לחבר כאן את כתובת ה-webhook בפועל.
- */
-export async function submitAssessment(answers: AssessmentAnswers): Promise<void> {
-  const WEBHOOK_URL = ""; // TODO: חברו כאן את כתובת ה-webhook
+/* יעד שליחת הלידים — Web3Forms */
+export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+export const WEB3FORMS_ACCESS_KEY = "ccae87b8-5da9-4e2b-96c9-fed4f1ac63c1";
 
-  if (!WEBHOOK_URL) {
-    // eslint-disable-next-line no-console
-    console.log("assessment answers (no webhook connected yet):", answers);
-    return;
+/* מיפוי מזהה־שאלה → טקסט השאלה, לצורך מייל קריא */
+const QUESTION_LABELS: Record<string, string> = Object.fromEntries(
+  STEPS.filter(
+    (s): s is RadioStep | TextStep => s.type === "radio" || s.type === "text"
+  ).map((s) => [s.id, s.question])
+);
+
+/**
+ * שלב הליד:
+ * "partial" — שמירה ראשונה מיד אחרי שם + טלפון (מסך ראשון)
+ * "full"    — שמירה שנייה עם כל פרטי הבריף בסיום
+ */
+export type LeadStage = "partial" | "full";
+
+/**
+ * שליחת הפרטים ל-Web3Forms. כל קריאה יוצרת רשומה/מייל נפרד.
+ */
+export async function submitAssessment(
+  answers: AssessmentAnswers,
+  stage: LeadStage = "full"
+): Promise<void> {
+  const yesNo = (v?: string) => (v === "true" ? "כן" : "לא");
+  const name = answers.fullName?.trim() || "";
+  const phone = answers.phone?.trim() || "";
+
+  const fields: Record<string, string> = {
+    "שם פרטי": name,
+    "טלפון": phone,
+    "אישור תקנון": yesNo(answers.consent),
+    "דיוור שיווקי": yesNo(answers.marketing),
+  };
+
+  // בשלב המלא מוסיפים את כל תשובות הבריף עם תוויות בעברית
+  if (stage === "full") {
+    for (const [id, label] of Object.entries(QUESTION_LABELS)) {
+      const val = answers[id];
+      if (val && val.trim()) fields[label] = val.trim();
+    }
   }
 
-  await fetch(WEBHOOK_URL, {
+  const stageLabel =
+    stage === "partial"
+      ? "פרטים ראשוניים (שם + טלפון)"
+      : "בריף קמפיין מלא";
+
+  const payload = {
+    access_key: WEB3FORMS_ACCESS_KEY,
+    from_name: "Maker לעסקים",
+    subject:
+      stage === "partial"
+        ? `ליד חדש (התחלה) — ${name || "ללא שם"}`
+        : `בריף מלא — ${name || "ללא שם"}`,
+    "שלב": stageLabel,
+    ...fields,
+  };
+
+  const res = await fetch(WEB3FORMS_ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(answers),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(payload),
   });
+
+  if (!res.ok) {
+    throw new Error(`web3forms responded ${res.status}`);
+  }
 }
