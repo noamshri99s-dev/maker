@@ -34,6 +34,7 @@ export default defineConfig({
         creators: resolve(root, 'index.html'),
         business: resolve(root, 'business/index.html'),
         emily: resolve(root, 'emily/index.html'),
+        tone: resolve(root, 'tone/index.html'),
         ht: resolve(root, 'ht/index.html'),
         htPrivacy: resolve(root, 'ht/privacy/index.html'),
       },
