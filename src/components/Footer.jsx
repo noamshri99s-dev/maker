@@ -20,7 +20,7 @@ export default function Footer() {
           </button>
         </div>
 
-        <span>© {new Date().getFullYear()} Maker — רשת היוצרים</span>
+        <span>© {new Date().getFullYear()} <span dir="ltr">Maker</span> — רשת היוצרים</span>
       </div>
     </footer>
   )

@@ -271,7 +271,7 @@ export default function JoinWizard() {
       <div className="wizard__panel">
         <div className="wizard__top">
           <div>
-            <div className="wizard__brand">Maker · שאלון הצטרפות</div>
+            <div className="wizard__brand"><span dir="ltr">Maker</span> · שאלון הצטרפות</div>
             <div className="wizard__count">
               שלב {step + 1} מתוך {steps.length}
             </div>

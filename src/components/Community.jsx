@@ -1,5 +1,6 @@
 import Reveal from './Reveal'
 import NetworkArt from './NetworkArt'
+import { withLtr } from '../brand/Ltr'
 
 const items = [
   {
@@ -30,7 +31,7 @@ export default function Community() {
             <span className="grad">לא כל אחד לבד.</span>
           </Reveal>
           <Reveal className="lead" as="p" delay={70}>
-            Maker היא לא פלטפורמה שזורקת אותך למים. אתה מצטרף לקולקטיב של יוצרים שעושים את זה יחד —
+            <span dir="ltr">Maker</span> היא לא פלטפורמה שזורקת אותך למים. אתה מצטרף לקולקטיב של יוצרים שעושים את זה יחד —
             אותם קמפיינים, אותו פּוּל, אותה מטרה.
           </Reveal>
         </div>
@@ -43,7 +44,7 @@ export default function Community() {
           {items.map((it, i) => (
             <Reveal className="together__item" key={it.title} delay={i * 90}>
               <h3>{it.title}</h3>
-              <p>{it.text}</p>
+              <p>{withLtr(it.text)}</p>
             </Reveal>
           ))}
         </div>

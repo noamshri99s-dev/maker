@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Maker brand layer — sky palette, type, frame and shared components.
+   Tokens are global (unique --mk-* names); page-level styling is scoped to
+   <body class="theme-maker"> so the business / emily / tone pages are untouched.
+   ========================================================================== */
+
+:root {
+  --mk-sky-deep: #2e6cc0; /* primary blue, text-safe with white */
+  --mk-sky: #6aa6e6;
+  --mk-sky-mid: #4f8ddb; /* accent text on light backgrounds (large text only) */
+  --mk-sky-soft: #cfe3f7;
+  --mk-mist: #eef4fb; /* light section background */
+  --mk-paper: #f4f7fb; /* page background around the frame */
+  --mk-ink: #0e1e36; /* all dark text */
+  --mk-ink-2: #3a4a60; /* secondary text */
+  --mk-signal: #ff6a3d; /* REC dot only — never for large areas */
+  --mk-sky-gradient: radial-gradient(
+    90% 70% at 50% 0%,
+    #2b66b8 0%,
+    #4785d6 40%,
+    #86b6ea 75%,
+    #cfe3f7 100%
+  );
+
+  --mk-r-frame: 32px;
+  --mk-r-card: 24px;
+  --mk-r-pill: 999px;
+  --mk-shadow-float: 0 24px 60px rgba(14, 30, 54, 0.18);
+
+  --mk-font-display: 'Karantina', 'Heebo', system-ui, sans-serif;
+  --mk-font-body: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mk-font-hand: 'Gveret Levin', 'Heebo', cursive;
+  --mk-font-wordmark: 'Inter Tight', 'Heebo', system-ui, sans-serif;
+}
+
+/* ---------- page + frame ---------- */
+
+body.theme-maker {
+  background: var(--mk-paper);
+  color: var(--mk-ink);
+  font-family: var(--mk-font-body);
+}
+
+.mk-frame {
+  margin: 16px;
+  border-radius: var(--mk-r-frame);
+  overflow: clip;
+  background: var(--mk-mist);
+}
+
+@media (max-width: 640px) {
+  .mk-frame {
+    margin: 8px;
+  }
+}
+
+/* ---------- MakerMark / logo ---------- */
+
+.mk-mark {
+  display: block;
+  flex: none;
+}
+
+.logo {
+  color: var(--mk-ink);
+}
+
+.logo__wordmark {
+  font-family: var(--mk-font-wordmark);
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+/* ---------- PillButton ---------- */
+
+.mk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding-inline: 22px;
+  border: 0;
+  border-radius: var(--mk-r-pill);
+  background: #fff;
+  color: var(--mk-ink);
+  font-family: var(--mk-font-body);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.mk-pill:hover {
+  background: var(--mk-sky-soft);
+}
+
+.mk-pill:focus-visible {
+  outline: 2px solid var(--mk-sky-deep);
+  outline-offset: 3px;
+}
+
+.mk-pill__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--mk-ink);
+  color: #fff;
+  flex: none;
+}
+
+.mk-pill__arrow {
+  display: block;
+  transition: translate 0.2s ease;
+}
+
+/* The glyph points left (inline-end in RTL); mirror it for LTR contexts. */
+[dir='ltr'] .mk-pill__arrow {
+  scale: -1 1;
+}
+
+.mk-pill:hover .mk-pill__arrow {
+  translate: -3px 0;
+}
+
+[dir='ltr'] .mk-pill:hover .mk-pill__arrow {
+  translate: 3px 0;
+}
+
+.mk-pill--glass {
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #fff;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mk-pill--glass:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.mk-pill--glass:focus-visible {
+  outline-color: #fff;
+}
+
+/* ---------- HandNote ---------- */
+
+.mk-hand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  color: var(--mk-ink);
+}
+
+.mk-hand--down-end {
+  align-items: flex-end;
+}
+
+.mk-hand--up {
+  flex-direction: column-reverse;
+}
+
+.mk-hand__text {
+  font-family: var(--mk-font-hand);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.mk-hand__arrow {
+  display: block;
+  width: 56px;
+  height: 56px;
+  overflow: visible;
+}
+
+/* Base glyph curves down toward the physical right = inline-start in RTL. */
+.mk-hand--down-end .mk-hand__arrow,
+[dir='ltr'] .mk-hand--down-start .mk-hand__arrow {
+  scale: -1 1;
+}
+
+[dir='ltr'] .mk-hand--down-end .mk-hand__arrow {
+  scale: 1 1;
+}
+
+.mk-hand--up .mk-hand__arrow {
+  scale: 1 -1;
+}
+
+[dir='ltr'] .mk-hand--up .mk-hand__arrow {
+  scale: -1 -1;
+}
+
+/* ---------- StatBubble ---------- */
+
+.mk-stat {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 116px;
+  height: 116px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--mk-ink);
+  text-align: center;
+}
+
+.mk-stat__value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--mk-font-display);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.mk-stat__unit {
+  font-size: 22px;
+}
+
+.mk-stat__label {
+  margin-top: 4px;
+  max-width: 88px;
+  font-family: var(--mk-font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--mk-ink-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-pill,
+  .mk-pill__arrow {
+    transition: none;
+  }
+}

@@ -1,32 +1,46 @@
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import NoFollowers from './components/NoFollowers'
-import HowItWorks from './components/HowItWorks'
-import Earnings from './components/Earnings'
-import Community from './components/Community'
-import SocialProof from './components/SocialProof'
-import FinalCta from './components/FinalCta'
-import Footer from './components/Footer'
 import JoinWizard from './components/JoinWizard'
 import { JoinProvider } from './components/JoinContext'
+import { LeadProvider } from './business/BizLeadContext'
+import SkyNav from './sky/SkyNav'
+import SkyHero from './sky/SkyHero'
+import SkyPhone from './sky/SkyPhone'
+import SkyArc from './sky/SkyArc'
+import SkyBento from './sky/SkyBento'
+import SkyHow from './sky/SkyHow'
+import SkyWork from './sky/SkyWork'
+import SkyFinal from './sky/SkyFinal'
+import SkyFooter from './sky/SkyFooter'
+import SkyBrief from './sky/SkyBrief'
+import './sky/sky.css'
+import './sky/brief.css'
 
+/**
+ * Home page — for business owners.
+ * Main CTA opens the brief form (SkyBrief, Web3Forms);
+ * "אני יוצר/ת" opens the creators sign-up (JoinWizard).
+ */
 export default function App() {
   return (
-    <JoinProvider>
-      <Nav />
-      <main>
-        <Hero />
-        <Community />
-        <SocialProof />
-        <HowItWorks />
-        <Marquee />
-        <NoFollowers />
-        <Earnings />
-        <FinalCta />
-      </main>
-      <Footer />
-      <JoinWizard />
-    </JoinProvider>
+    <LeadProvider>
+      <JoinProvider>
+        <div className="mk-frame">
+          <SkyNav />
+          <main>
+            <div className="sk-skytop">
+              <SkyHero />
+              <SkyPhone />
+              <SkyArc />
+            </div>
+            <SkyBento />
+            <SkyHow />
+            <SkyWork />
+            <SkyFinal />
+          </main>
+          <SkyFooter />
+        </div>
+        <SkyBrief />
+        <JoinWizard />
+      </JoinProvider>
+    </LeadProvider>
   )
 }

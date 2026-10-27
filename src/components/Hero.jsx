@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="wrap hero__grid">
         <div className="hero__copy">
           <Reveal className="eyebrow" as="div">
-            ✦ רשת היוצרים של Maker
+            ✦ רשת היוצרים של <span dir="ltr">Maker</span>
           </Reveal>
 
           <Reveal as="h1" delay={60}>
@@ -83,7 +83,7 @@ export default function Hero() {
             <div className="hero-board__head">
               <div>
                 <strong>לוח הקמפיינים</strong>
-                <span>פול פעיל · Maker</span>
+                <span>פול פעיל · <span dir="ltr">Maker</span></span>
               </div>
               <em>לייב</em>
             </div>
