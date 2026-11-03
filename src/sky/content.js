@@ -139,6 +139,8 @@ export const work = {
     { instagram: 'https://www.instagram.com/reel/De-BCAAirym/' },
     { instagram: 'https://www.instagram.com/reel/De-B46rikW4/' },
     { instagram: 'https://www.instagram.com/reel/De-BkqdiZWx/' },
+    { instagram: 'https://www.instagram.com/reel/DfR7E4Oilrf/' },
+    { instagram: 'https://www.instagram.com/reel/DfP3joxE9YU/' },
   ],
   /** Link to the Instagram profile with all the work. Leave '' to hide the button. */
   profileUrl: '',

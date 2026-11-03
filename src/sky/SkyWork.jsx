@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 import HandNote from '../brand/HandNote'
 import { gsap, useMakerMotion } from '../brand/motion'
 import SkyIcon from './SkyIcon'
@@ -15,23 +15,9 @@ function parseInstagram(url) {
 
 function InstagramReel({ url, index }) {
   const ig = parseInstagram(url)
-  // Load the heavy Instagram iframe only when someone asks for it.
-  const [on, setOn] = useState(false)
   if (!ig) return <ReelPlaceholder index={index} broken />
 
-  if (!on) {
-    return (
-      <button type="button" className="sk-reel__cover" onClick={() => setOn(true)}>
-        <span className="sk-reel__play" aria-hidden="true">
-          <SkyIcon name="play" size={22} />
-        </span>
-        <span className="sk-reel__cta">צפייה ברילס</span>
-        <span className="sk-reel__ig">
-          <SkyIcon name="instagram" size={14} /> Instagram
-        </span>
-      </button>
-    )
-  }
+  // The Instagram player is open from the start; viewers just press play.
   return (
     <iframe
       className="sk-reel__frame"
