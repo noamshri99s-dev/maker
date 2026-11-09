@@ -10,15 +10,16 @@ export default function NamasteHero() {
       <div className="nm-hero__copy">
         <p className="nm-chip">
           <i />
-          קמפיין פתוח · {namasteSite.poolSize} מקומות בפול
+          מועמדות · עד {namasteSite.poolSize} מקומות
         </p>
         <h1>
-          <span>סרטון אחד.</span>
-          <span>תכשיט בשווי ₪{namasteSite.productValue}.</span>
+          <span>נרשמות למועמדות.</span>
+          <span>התכשיט לא מתנה.</span>
         </h1>
         <p className="nm-hero__sub">
-          מגייסים {namasteSite.poolSize} יוצרות לצלם סרטון אחד על נמסטה. ההצעה היא תכשיט עבודת יד
-          בשווי ₪{namasteSite.productValue} — הוא מגיע הביתה, ויש תבנית מוכנה לצילום.
+          ההרשמה היא בקשה להיכלל בפול בלבד. היא לא מקנה את התכשיט, לא מהווה מתנה, ולא מבטיחה קבלה
+          לקמפיין. מי שתאושר ותשלים סרטון אחד — התמורה היא תכשיט עבודת יד בשווי ₪
+          {namasteSite.productValue}.
         </p>
         <div className="nm-hero__ctas">
           <PillButton href="#join" onClick={(event) => handleSectionClick(event, 'join')}>
@@ -41,9 +42,9 @@ export default function NamasteHero() {
       <article className="nm-offer">
         <Jewelry className="nm-offer__jewel" />
         <div className="nm-offer__copy">
-          <span>ההצעה</span>
+          <span>הקמפיין, לא ההרשמה</span>
           <strong>תכשיט עבודת יד</strong>
-          <p>נמסטה שולחת את הפריט הביתה. זה מה שמקבלות על הסרטון.</p>
+          <p>תמורה למי שתאושר ותשלים. ההרשמה עצמה היא רק הזמנה להגיש מועמדות.</p>
         </div>
         <b className="nm-offer__price">₪{namasteSite.productValue}</b>
       </article>

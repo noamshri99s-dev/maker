@@ -4,7 +4,7 @@ import { handleSectionClick } from './scroll'
 const links = [
   { label: 'מה מצלמים', href: 'product' },
   { label: 'איך זה עובד', href: 'how' },
-  { label: 'הרשמה לפול', href: 'join' },
+  { label: 'מועמדות', href: 'join' },
 ]
 
 export default function NamasteFooter() {

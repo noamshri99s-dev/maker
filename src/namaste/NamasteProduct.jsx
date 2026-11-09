@@ -8,15 +8,15 @@ export default function NamasteProduct() {
       <section className="nm-product" id="product">
         <div className="nm-product__grid">
           <div>
-            <p className="nm-kicker">המוצר שמצלמים</p>
+            <p className="nm-kicker">מה כלול בקמפיין</p>
             <h2>
-              תכשיט אחד.
+              התכשיט בקמפיין.
               <br />
-              עבודת יד.
+              לא בהרשמה.
             </h2>
             <p className="nm-lead">
-              נמסטה עושה תכשיטים בעבודת יד. מצלמות סרטון אחד על הפריט שמגיע אלייך — ועל הסרטון הזה
-              מקבלות את התכשיט, בשווי ₪{namasteSite.productValue}.
+              נמסטה עושה תכשיטים בעבודת יד. התכשיט בשווי ₪{namasteSite.productValue} הוא התמורה של
+              הקמפיין, ורק למי שתאושר ותשלים סרטון אחד. ההרשמה לדף הזה לא נותנת אותו.
             </p>
             <div className="nm-talk">
               <h3>מה אומרות בסרטון</h3>
@@ -33,7 +33,7 @@ export default function NamasteProduct() {
 
           <aside className="nm-showcase">
             <Jewelry className="nm-showcase__jewel" />
-            <p>נמסטה</p>
+            <p>תמורה לקמפיין שאושר</p>
             <strong>תכשיט עבודת יד</strong>
             <b>₪{namasteSite.productValue}</b>
           </aside>
@@ -55,7 +55,7 @@ export default function NamasteProduct() {
       <section className="nm-how" id="how">
         <div className="nm-how__head">
           <h2>איך זה עובד</h2>
-          <p>ארבעה שלבים. הפול הוא לחמש יוצרות שנרשמות לקמפיין הזה.</p>
+          <p>ארבעה שלבים. ההרשמה היא מועמדות. הקמפיין והתכשיט מגיעים רק אחרי אישור.</p>
         </div>
         <ol className="nm-steps">
           {namasteSteps.map((step) => (

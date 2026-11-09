@@ -712,10 +712,27 @@ body.theme-maker ::selection {
   color: var(--mk-ink);
 }
 
+.nm-field input::placeholder {
+  color: #8aa0b8;
+  font-weight: 500;
+}
+
 .nm-field input:focus {
   border-color: var(--mk-sky-deep);
   box-shadow: 0 0 0 4px rgba(46, 108, 192, 0.16);
   outline: none;
+}
+
+.nm-legal {
+  margin-top: 14px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--mk-ink-2);
+}
+
+.nm-seat span {
+  text-align: center;
 }
 
 .nm-error {
